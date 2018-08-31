@@ -51,9 +51,9 @@ regresion_mode <- lm(log_totalstreams~mode, data=New_analysis1)
 regression_speech <- lm(log_totalstreams~ speechiness, data=New_analysis1)
 regression_tempo <- lm(log_totalstreams~ tempo, data=New_analysis1)
 regression_key <- lm(log_totalstreams~ key_numeric, data=New_analysis1)
-regression_timesig <- lm(log_totalstreams~ time_signature, data=New_analysis1)
+regression_timesig <- lm(log_totalstreams~ danceability, data=New_analysis1)
 
-sum#fixed fx 
+#fixed fx 
 regression_Dance1 <- lm(log_totalstreams~ danceability + as.factor(artist), data=New_analysis1)
 regression_valence1 <- lm(log_totalstreams~ valence + as.factor(artist), data=New_analysis1)
 regression_Acoustic1 <- lm(log_totalstreams~ acousticness + as.factor(artist), data=New_analysis1)
@@ -64,7 +64,7 @@ regresion_mode1 <- lm(log_totalstreams~mode + as.factor(artist), data=New_analys
 regression_speech1 <- lm(log_totalstreams~ speechiness + as.factor(artist), data=New_analysis1)
 regression_tempo1 <- lm(log_totalstreams~ tempo + as.factor(artist), data=New_analysis1)
 regression_key1 <- lm(log_totalstreams~ key_numeric + as.factor(artist) , data=New_analysis1)
-regression_timesig1 <- lm(log_totalstreams~ time_signature + as.factor(artist), data=New_analysis1)
+regression_timesig1 <- lm(log_totalstreams~ danceability + as.factor(artist), data=New_analysis1)
 #html 
 stargazer::stargazer(regression_Dance1,regression_valence1,regression_Acoustic1,regression_energy1,regression_instrumentall1,
                      regression_liveness1,regresion_mode1,regression_speech1,regression_tempo1,regression_key1,regression_timesig1, type = "html", omit =c("artist"),
@@ -117,19 +117,7 @@ stargazer(Scaled_AF_Only, type = "html", title="Descriptive statistics", digits=
 stargazer(New_analysis1[c("artist_num_followers","totalwk_num","year","Numeric_totalstreams")], type = "html", title="Descriptive Statistics", digits=1, out="where.html",
 covariate.labels=c("Artist Followers", "Total Weeks", "Release Year", "Total Streams"))
 
-stargazer(Nice_numbers_AF, type = "html", title="Descriptive statistics", digits=1, out="nice.html")
-
 #total weeks regression maybe use 
 regression_weeks <- lm(totalwk_num~ as.factor(group),  data=New_analysis1)
 regression_weeks_c <- lm(totalwk_num~ as.factor(group)+ log_totalstreams,  data=New_analysis1)
 stargazer::stargazer(regression_weeks, regression_weeks_c, type = "html", out= "totalweeks.html")
-
-exp2<- function (x) {
-  thig <- exp(x)-1
-  thig2 <- thig *100
-  return(thig2)}
-}
-
-
-COZ <- c(0.329,-0.025,-0.070, -0.096,-0.154, -0.065, -0.164, 0.068, -0.003, 0.007)
-
