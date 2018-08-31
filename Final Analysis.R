@@ -1,19 +1,4 @@
 #Data set of audio features only 
-Scaled_AF_Only <- new_analysis %>% select(acousticness,danceability,energy,instrumentalness,key.y_numeric,liveness,mode,speechiness,tempo,time_signature,valence)
-Nice_numbers_AF <- nice %>%select(acousticness.y,danceability.y,energy.y,instrumentalness.y,key_numeric,liveness.y,mode.x,speechiness.y,tempo.y,time_signature.y,valence.y)
-nice$key_numeric <- NA
-nice$key_numeric[nice$key.y=="A"] <- 0
-nice$key_numeric[nice$key.y=="A#"] <- 1
-nice$key_numeric[nice$key.y=="B"]<- 2
-nice$key_numeric[nice$key.y=="C"] <- 3
-nice$key_numeric[nice$key.y=="C#"] <-4
-nice$key_numeric[nice$key.y=="D"]  <- 5
-nice$key_numeric[nice$key.y=="D#"] <- 6
-nice$key_numeric[nice$key.y=="E"]<- 7
-nice$key_numeric[nice$key.y=="F"] <- 8
-nice$key_numeric[nice$key.y=="F#"]<- 9
-nice$key_numeric[nice$key.y=="G"] <- 10
-nice$key_numeric[nice$key.y=="G#"] <- 11
 
 #Distance Matrix 
 distance <- dist(Scaled_AF_Only, method = "euclidean") 
@@ -39,31 +24,7 @@ distance <- as.matrix(distance)
         
         library("factoextra") #results of above function 
         fviz_nbclust(nb)
-        
-        # *** : The Hubert index is a graphical method of determining the number of clusters.
-        # In the plot of Hubert index, we seek a significant knee that corresponds to a 
-        # significant increase of the value of the measure i.e the significant peak in Hubert
-        # index second differences plot. 
-        # 
-        # *** : The D index is a graphical method of determining the number of clusters. 
-        # In the plot of D index, we seek a significant knee (the significant peak in Dindex
-        #                                                     second differences plot) that corresponds to a significant increase of the value of
-        # the measure. 
-        # 
-        # ******************************************************************* 
-        #   * Among all indices:                                                
-        #   * 6 proposed 2 as the best number of clusters 
-        # * 8 proposed 3 as the best number of clusters 
-        # * 2 proposed 4 as the best number of clusters 
-        # * 1 proposed 6 as the best number of clusters 
-        # * 1 proposed 8 as the best number of clusters 
-        # * 3 proposed 9 as the best number of clusters 
-        # * 3 proposed 10 as the best number of clusters 
-        # 
-        # ***** Conclusion *****                            
-        #   
-        #   * According to the majority rule, the best number of clusters is  3 
-        # 
+       
         
         Scaled_AF_R <- New_analysis1 %>% select(track,acousticness,danceability,energy,instrumentalness,key_numeric,liveness,mode,speechiness,tempo,time_signature,valence)
         row.names(Scaled_AF_R) <- Scaled_AF_R$track  
